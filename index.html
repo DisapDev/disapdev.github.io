@@ -8,6 +8,30 @@
 
   <!-- three.js -->
   <script src="https://unpkg.com/three@0.126.0/build/three.js"></script>
+  <script>
+    // Debug check for three.js and WebXR on Android
+    function isAndroid() {
+      return /Android/.test(navigator.userAgent);
+    }
+
+    window.addEventListener('load', () => {
+      if (isAndroid()) {
+        // Check if three.js loaded
+        if (typeof THREE !== 'undefined') {
+          alert('✓ Debug: three.js loaded successfully');
+        } else {
+          alert('✗ Debug: three.js failed to load');
+        }
+
+        // Check if WebXR API is available
+        if (navigator.xr) {
+          alert('✓ Debug: WebXR API available');
+        } else {
+          alert('✗ Debug: WebXR API not available');
+        }
+      }
+    });
+  </script>
 </head>
 <body>
 
