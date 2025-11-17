@@ -68,8 +68,8 @@ async function activateXR() {
 
   const scene = new THREE.Scene();
 
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
-  directionalLight.position.set(10, 15, 10);
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+  directionalLight.position.set(10, 15, 10); // need some adjustment
   scene.add(directionalLight);
 
   const renderer = new THREE.WebGLRenderer({
