@@ -83,7 +83,9 @@ async function activateXR() {
       const model = gltf.scene;
       
       // Position it 0.5 meters in front of you
-      model.position.set(0, 0, -0.5);
+      model.position.set(0, -0.5, -0.5);
+      const scaleFactor = 0.1;
+      model.scale.set(scaleFactor, scaleFactor, scaleFactor) // Adjust as needed
       
       // If the model is huge/tiny, you might need to adjust scale here:
       // model.scale.set(0.1, 0.1, 0.1); 
