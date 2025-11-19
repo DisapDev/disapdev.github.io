@@ -39,12 +39,17 @@
 
   <model-viewer 
       id="viewer"
-      src="../gltf/test2_no_rebar_scale_0_01.gltf"
-      alt="Draco Model Test"
+      src="..\glb_draco\test2_no_rebar_scale_0_01 DRACO.glb"
+      alt="Model Tests"
       ar
-      ar-modes="webxr scene-viewer quick-look" 
-      camera-controls
+      scale="0.01 0.01 0.01"
+
+      ar-scale="auto"
+      
+      ar-placement="floor"
+      
       auto-rotate
+      touch-action="pan-y"
       shadow-intensity="1"
       environment-image="neutral"
   >
