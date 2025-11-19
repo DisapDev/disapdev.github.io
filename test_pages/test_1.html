@@ -26,7 +26,7 @@
 
 <div id="debug-overlay">Waiting for user...<br></div>
 
-<button onclick="activateXR()" style="padding: 20px; font-size: 20px; margin-top: 220px;">Start Datasmith gltf Test_1</button>
+<button onclick="activateXR()" style="padding: 20px; font-size: 20px; margin-top: 220px;">Datasmith gltf test1_scale_0_01</button>
 
 <div>
     <a href="../index.html">
@@ -90,7 +90,7 @@ async function activateXR() {
   
   // Based on your image, the path is: gltf/test1_scale_0_01.gltf
   loader.load(
-    "gltf/test1_scale_0_01.gltf", 
+    "../gltf/test1_scale_0_01.gltf", 
     function(gltf) {
       const model = gltf.scene;
       
