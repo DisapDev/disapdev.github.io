@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debug Model Viewer</title>
+
+  <style>
+    body { margin: 0; padding: 0; height: 100vh; width: 100vw; font-family: sans-serif; background-color: #2d2d2d; }
+    model-viewer { width: 100%; height: 100%; }
+    
+    #debug-overlay {
+      position: fixed; top: 10px; left: 10px; width: 90%;
+      background: rgba(0, 0, 0, 0.8); color: #00ff00;
+      font-family: monospace; padding: 10px; border-radius: 5px;
+      pointer-events: none; z-index: 9999; max-height: 300px; overflow-y: auto;
+    }
+    
+    .back-btn {
+      position: absolute; top: 20px; right: 20px; z-index: 999;
+      padding: 10px; background: white; border-radius: 5px;
+      text-decoration: none; color: black; font-weight: bold;
+    }
+
+    .ar-button {
+      background-color: white; border-radius: 4px; border: none;
+      position: absolute; bottom: 16px; right: 16px;
+      padding: 12px 24px; font-size: 16px; font-weight: bold;
+      color: black; display: none; /* Hidden until AR is ready */
+    }
+  </style>
+
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+</head>
+<body>
+
+  <div id="debug-overlay">Initializing...<br></div>
+  <a href="../index.html" class="back-btn">Home</a>
+
+  <model-viewer 
+      id="viewer"
+      src="..\glb_draco\test2_no_rebar_scale_0_01 DRACO.glb"
+      alt="Model Tests"
+      ar
+      camera-controls
+      scale="0.01 0.01 0.01"
+      loading="auto"
+      ar-scale="auto"
+      ar-placement="floor"
+      auto-rotate
+      touch-action="pan-y"
+      shadow-intensity="1"
+      environment-image="neutral"
+  >
+      <button slot="ar-button" id="ar-btn" class="ar-button">
+          👋 View in AR
+      </button>
+  </model-viewer>
+
+  <script>
+    const viewer = document.querySelector('#viewer');
+    const overlay = document.querySelector('#debug-overlay');
+    const arBtn = document.querySelector('#ar-btn');
+
+    function log(msg, isError = false) {
+      overlay.innerHTML += (isError ? "❌ " : "ℹ️ ") + msg + "<br>";
+      console.log(msg);
+    }
+
+    // 1. Listen for Load Errors (The most likely culprit)
+    viewer.addEventListener('error', (event) => {
+      log(`ERROR: ${event.detail.type}`, true);
+      log("Possible causes: File path wrong, file too big, or Draco decoder failed.");
+    });
+
+    // 2. Listen for Progress (To verify it found the file)
+    viewer.addEventListener('progress', (event) => {
+      const progress = Math.round(event.detail.totalProgress * 100);
+      if (progress === 100) {
+        log("Download 100% complete. Processing...");
+      } else if (progress === 0) {
+        log("Started downloading...");
+      }
+    });
+
+    // 3. Listen for Success
+    viewer.addEventListener('load', () => {
+      log("✅ Model loaded successfully!");
+      log("Ready for AR.");
+      arBtn.style.display = "block"; // Show button only if loaded
+    });
+
+    // 4. AR Status
+    viewer.addEventListener('ar-status', (event) => {
+      log(`AR Status: ${event.detail.status}`);
+    });
+
+  </script>
+</body>
+</html>
