@@ -157,6 +157,7 @@
   <div id="actions">
     <a id="btn-hit-test" href="#" class="ar-btn">🚀 AR Hit-Test (Unavailable) </a>
     <a id="btn-marker" href="#" class="ar-btn">🖼️ AR Marker (Unavailable) </a>
+    <a href="../index.html" id="btn-marker" href="#" class="ar-btn">🏠 Go To Homepage </a>
   </div>
 
   <script type="module">
@@ -191,8 +192,8 @@
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.autoRotate = true; // Enable auto rotation by default
     controls.autoRotateSpeed = 2; // Rotation speed
-    controls.minDistance = 1;
-    controls.maxDistance = 100;
+    controls.minDistance = 0.1;
+    controls.maxDistance = 10000;
     controls.enableZoom = true;
     controls.enableRotate = true;
     controls.mouseButtons = {
