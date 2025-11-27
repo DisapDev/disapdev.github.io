@@ -223,7 +223,7 @@
 
     // Load HDR Environment Map
     const rgbeLoader = new RGBELoader();
-    rgbeLoader.load('../assets/sunny_rose_garden_2k.hdr', (texture) => {
+    rgbeLoader.load('../assets/plain.hdr', (texture) => {
         texture.mapping = THREE.EquirectangularReflectionMapping;
         scene.environment = texture;
         scene.background = texture;
